@@ -1,0 +1,43 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+
+            APP_DIR=~/dashboard_estudiante
+
+            # Pull latest code
+            if [ -d "$APP_DIR/.git" ]; then
+              cd "$APP_DIR"
+              git pull origin main
+            else
+              git clone https://github.com/L1TnzO/Dashboard_Estudiante_Fabrica.git "$APP_DIR"
+              cd "$APP_DIR"
+            fi
+
+            # Build and restart Docker container
+            docker build -t dashboard_estudiante .
+            docker stop dashboard_estudiante 2>/dev/null || true
+            docker rm dashboard_estudiante 2>/dev/null || true
+            docker run -d \
+              --name dashboard_estudiante \
+              --restart unless-stopped \
+              -p 8501:8501 \
+              dashboard_estudiante

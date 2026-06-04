@@ -1,0 +1,7 @@
+{
+  "work_order_id": "WO-20260530-133039",
+  "project_id": "PROYECTO_UNO",
+  "project_name": "Dashboard de Rendimiento Académico",
+  "requirement": "\nDesarrollar un dashboard interactivo con Streamlit y Pandas que permita\nvisualizar métricas de rendimiento académico de estudiantes universitarios.\n\nEl sistema debe incluir:\n- Backend de datos: SQLite con tablas de estudiantes, materias y notas.\n- Seeder automático con 20 estudiantes, 6 materias y 3 períodos académicos.\n- Dashboard Streamlit con 4 tabs: Resumen General, Por Materia, Evolución Temporal, Alumnos en Riesgo.\n- KPIs: promedio general, total estudiantes, % aprobados, cantidad en riesgo.\n- Filtros sidebar: período, curso, carrera.\n- Criterio de riesgo: nota < 4.0 O asistencia < 75%.\n- Suite pytest con SQLite in-memory (7 tests mínimo).\n",
+  "started_at": "2026-05-30T13:30:39.074557Z"
+}
