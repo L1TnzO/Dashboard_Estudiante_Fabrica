@@ -41,3 +41,5 @@ jobs:
               --restart unless-stopped \
               -p 8501:8501 \
               dashboard_estudiante
+
+            sudo systemctl reload nginx 2>/dev/null || true
