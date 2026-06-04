@@ -33,10 +33,10 @@ jobs:
             fi
 
             # Build and restart Docker container
-            docker build -t dashboard_estudiante .
-            docker stop dashboard_estudiante 2>/dev/null || true
-            docker rm dashboard_estudiante 2>/dev/null || true
-            docker run -d \
+            sudo docker build -t dashboard_estudiante .
+            sudo docker stop dashboard_estudiante 2>/dev/null || true
+            sudo docker rm dashboard_estudiante 2>/dev/null || true
+            sudo docker run -d \
               --name dashboard_estudiante \
               --restart unless-stopped \
               -p 8501:8501 \
